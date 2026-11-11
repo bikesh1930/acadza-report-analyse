@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8fc" />
+  <meta name="description" content="Acadza faculty workspace for reviewing student-reported question issues." />
+  <title>Acadza | Faculty review workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="Acadza home">
+      <img class="brand-logo" src="https://www.acadza.com/assets/icons/acadzalogo.svg" alt="Acadza" />
+      <span class="brand-divider"></span>
+      <span class="brand-product">Faculty<br>workspace</span>
+    </a>
+    <div class="workspace-label">WORKSPACE</div>
+    <button class="nav-item active" id="navQueue"><span class="nav-icon" aria-hidden="true">▤</span><span>Review queue</span><span class="nav-count" id="navPending">—</span></button>
+    <button class="nav-item" id="navAudit"><span class="nav-icon" aria-hidden="true">◷</span><span>Decision history</span></button>
+    <div class="sidebar-note">
+      <div class="note-icon">✳</div>
+      <div><b>Faculty stays in control</b><p>The system groups similar reports and surfaces possible issues. You decide whether anything changes.</p></div>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="user-chip"><div class="avatar">FR</div><div><b>Faculty reviewer</b><small>Content operations</small></div><span class="online-dot" title="Workspace active"></span></div>
+      <div class="sidebar-foot">ACADZA CONTENT OPERATIONS <span>·</span> DEMO WORKSPACE</div>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="topbar">
+      <div class="breadcrumb">Workspace <span>/</span> <b id="crumbCurrent">Review queue</b></div>
+      <div class="top-actions">
+        <div class="engine-pill"><span class="engine-dot"></span><span id="engineMode">Review system ready</span></div>
+        <button class="icon-button" title="Refresh queue" aria-label="Refresh queue" id="refreshBtn">↻</button>
+        <div class="avatar small" title="Faculty reviewer">FR</div>
+      </div>
+    </header>
+
+    <section class="page-heading">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-dot"></span> FACULTY WORKSPACE <span class="date-label">· 11 NOV 2026</span></div>
+        <h1 id="pageTitle">Your review desk. <span class="heading-period">Start with what matters.</span></h1>
+        <p id="pageSub">A clear view of learner feedback, suggested fixes and the decisions that still need you.</p>
+      </div>
+      <button class="export-btn" id="exportBtn"><span class="button-icon">↓</span> Export review data</button>
+    </section>
+
+    <section class="metrics" id="metrics" aria-label="Queue overview">
+      <div class="metric-card"><div class="metric-top"><span class="metric-label">Student reports</span><span class="metric-icon blue">↗</span></div><div class="metric-value" id="mReports">—</div><div class="metric-foot">Feedback received from learners</div></div>
+      <div class="metric-card"><div class="metric-top"><span class="metric-label">Questions reported</span><span class="metric-icon violet">▤</span></div><div class="metric-value" id="mCases">—</div><div class="metric-foot">Similar reports grouped together</div></div>
+      <div class="metric-card"><div class="metric-top"><span class="metric-label">Needs your review</span><span class="metric-icon amber">✳</span></div><div class="metric-value" id="mFaculty">—</div><div class="metric-foot">Cases that need faculty review</div></div>
+      <div class="metric-card"><div class="metric-top"><span class="metric-label">Policy-eligible candidates</span><span class="metric-icon green">✓</span></div><div class="metric-value" id="mAuto">—</div><div class="metric-foot">Eligible under the repair policy</div></div>
+    </section>
+
+    <section class="workspace" id="queueWorkspace">
+      <div class="queue-panel">
+        <div class="queue-toolbar">
+          <div><div class="panel-overline">INBOX</div><h2>Student feedback <span class="count-badge" id="caseCount">—</span></h2><p>Similar reports are grouped so you can review a question once.</p></div>
+          <button class="filter-toggle" id="filterToggle"><span>☷</span> Filters</button>
+        </div>
+        <div class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><input id="searchInput" placeholder="Search by question, subject or student comment" autocomplete="off" /></div>
+        <div class="filters" id="filters">
+          <select id="verdictFilter" aria-label="Filter by assessment"><option value="">All assessments</option><option value="defect">Content issue</option><option value="no_error">No error found</option><option value="app_issue">App issue</option><option value="display_issue">Display issue</option><option value="language_mode">Language request</option><option value="not_actionable">Not actionable</option></select>
+          <select id="routeFilter" aria-label="Filter by next step"><option value="">All next steps</option><option value="faculty_review">Faculty review</option><option value="auto_apply">Low-risk candidate</option><option value="no_change">No change suggested</option></select>
+          <select id="statusFilter" aria-label="Filter by review status"><option value="">All review statuses</option><option value="pending">Waiting for review</option><option value="approve">Approved</option><option value="reject">Declined</option><option value="edit">Edited</option></select>
+        </div>
+        <div class="case-list" id="caseList"><div class="loading-state"><span class="loading-dot"></span> Bringing the reports together…</div></div>
+        <div class="queue-footer"><span><span class="footer-dot"></span> Up to date</span><span id="queueFootCount">—</span></div>
+      </div>
+      <section class="detail-panel" id="detailPanel"><div class="empty-detail"><div class="empty-icon">☝</div><h3>Choose a question to get started</h3><p>You’ll see the original question, what learners reported, and the suggested next step here.</p></div></section>
+    </section>
+
+    <section class="audit-workspace hidden" id="auditWorkspace"><div class="audit-header"><div><div class="panel-overline">ACCOUNTABILITY</div><h2>Decision history</h2><p>A clear record of what was approved, edited or declined.</p></div><button class="secondary-btn" id="backQueue">← Back to review queue</button></div><div id="auditList" class="audit-list"></div></section>
+    <footer class="app-footer"><span>ACADZA <span class="footer-separator">·</span> FACULTY WORKSPACE</span><span>Suggestions are reviewed by people before changes are recorded.</span><span>DEMO v1.0</span></footer>
+  </main>
+</div>
+<div class="modal-backdrop hidden" id="actionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <form class="action-modal" id="actionModalForm">
+    <div class="modal-kicker">FACULTY ACTION</div>
+    <h2 id="modalTitle">Add a review note</h2>
+    <p id="modalDescription">Your note will be saved with this decision.</p>
+    <div id="modalFields"></div>
+    <div class="modal-actions"><button type="button" class="secondary-btn" id="modalCancel">Cancel</button><button type="submit" class="action-btn approve" id="modalSubmit">Save decision</button></div>
+  </form>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
