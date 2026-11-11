@@ -1,4 +1,4 @@
-﻿# Acadza Report â†’ Fix
+﻿# Acadza Report Analyse
 
 A faculty-first question integrity console for triaging student error reports, proposing constrained repairs, and recording review decisions.
 
